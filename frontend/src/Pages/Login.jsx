@@ -12,9 +12,22 @@ function Login() {
     setFormData({ ...formData, [name]: value });
   };
 
+  const Validate = () => {
+    //Check all fields are filled
+    for (const key in formData) {
+      if (!formData[key]) {
+        alert(`Please fill the ${key} field!`);
+        return false;
+      }
+    }
+    return true;
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert("Login form submitted");
+    if (Validate()) {
+      alert("Login form submitted");
+    }
   };
 
   return (
