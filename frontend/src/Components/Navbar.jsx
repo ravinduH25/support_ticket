@@ -9,7 +9,7 @@ function Navbar() {
         </a>
         <div className="collapse navbar-collapse d-sm-inline-flex justify-content-end">
           <ul className="navbar-nav">
-            <li className="nav-item">
+            {/* <li className="nav-item">
               <a className="nav-link text-dark fw-semibold px-3" href="#">
                 Dashboard
               </a>
@@ -18,7 +18,7 @@ function Navbar() {
               <a className="nav-link text-dark fw-semibold px-3" href="#">
                 User Manage
               </a>
-            </li>
+            </li> */}
             <li className="nav-item">
               <a className="nav-link text-danger fw-semibold px-3" href="/home">
                 Logout
