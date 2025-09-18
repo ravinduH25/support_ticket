@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function Register() {
   const [formData, setFormData] = useState({
@@ -11,6 +11,8 @@ function Register() {
     confirmPassword: "",
   });
 
+  const navigate = useNavigate();
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     let validInput = value;
@@ -21,6 +23,15 @@ function Register() {
     } else if (name === "phone") {
       // Numbers only
       validInput = value.replace(/[^0-9]/g, "");
+      // Limit to 10 digits
+      if (validInput.length > 10) {
+        validInput = validInput.slice(0, 10);
+      }
+
+      // Ensure first digit is 0
+      if (validInput.length > 0 && validInput[0] !== "0") {
+        validInput = "0" + validInput.slice(1);
+      }
     }
 
     setFormData({ ...formData, [name]: validInput });
@@ -54,11 +65,35 @@ function Register() {
     return true;
   };
 
-  const handleSubmit = (e) => {
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   if (Validate()) {
+  //     alert("Form submitted successfully");
+  //   }
+  // };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (Validate()) {
-      alert("Form submitted successfully");
-    }
+    // if (Validate()) {
+    //   try {
+    //     const response = await fetch(
+    //       "https://jsonplaceholder.typicode.com/users",
+    //       {
+    //         method: "POST",
+    //         headers: { "Content-Type": "application/json" },
+    //         body: JSON.stringify(formData),
+    //       }
+    //     );
+
+    //     const data = await response.json();
+    //     console.log("Registered user:", data);
+    //     alert("Registration successful!");
+    //     navigate("/login");
+    //   } catch (error) {
+    //     console.error("Error registering user:", error);
+    //     alert("Registration failed. Try again.");
+    //   }
+    // }
   };
 
   return (
@@ -146,8 +181,17 @@ function Register() {
               </div>
             </form>
             <div className="text-center mt-3">
-              <p>
+              {/* <p>
                 Already have an account? <Link to="/login">Login here</Link>
+              </p> */}
+              <p>
+                Already have an account?
+                <u>
+                  <a onClick={() => navigate("/login")}>Login here</a>
+                  {/* <a onClick={() => navigation.navigate("Login")}>
+                    Login here
+                  </a> */}
+                </u>
               </p>
             </div>
           </div>

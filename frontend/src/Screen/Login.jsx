@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import Button from "../Components/Button";
 
 function Login() {
   const [formData, setFormData] = useState({
@@ -12,6 +13,8 @@ function Login() {
     setFormData({ ...formData, [name]: value });
   };
 
+  const navigate = useNavigate();
+
   const Validate = () => {
     //Check all fields are filled
     for (const key in formData) {
@@ -23,10 +26,36 @@ function Login() {
     return true;
   };
 
-  const handleSubmit = (e) => {
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   if (Validate()) {
+  //     alert("Login form submitted");
+  //     navigate("/dashboard");
+  //   }
+  // };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (Validate()) {
-      alert("Login form submitted");
+      try {
+        const response = await fetch(
+          "https://jsonplaceholder.typicode.com/users",
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(formData),
+          }
+        );
+
+        const data = await response.json();
+        console.log("Login success:", data);
+
+        alert("Login successful!");
+        navigate("/main");
+      } catch (error) {
+        console.error("Error logging in:", error);
+        alert("Login failed. Try again.");
+      }
     }
   };
 
@@ -71,6 +100,15 @@ function Login() {
               <p>
                 Don't have an account? <Link to="/register">Register here</Link>
               </p>
+              {/* <p>
+                Don't have an account?
+                <Button
+                  url="/register"
+                  style="btn btn-primary"
+                  name="Register"
+                />
+                <Link to="/register">Register here</Link>
+              </p> */}
             </div>
           </div>
         </div>
