@@ -6,20 +6,20 @@ import Register from "./Screen/Register";
 import Login from "./Screen/Login";
 import Home from "./Screen/Home";
 import Dashboard from "./Screen/Dashboard";
-import SupportTicket from "./SupportTicket";
+import MainScreen from "./Screen/MainScreen";
 
-function App() {
+function SupportTicket() {
   return (
-    <SupportTicket />
-    // <Router>
-    //   <Routes>
-    //     <Route path="/" element={<Home />} />
-    //     <Route path="/home" element={<Home />} />
-    //     <Route path="/login" element={<Login />} />
-    //     <Route path="/register" element={<Register />} />
-    //     <Route path="/dashboard" element={<Dashboard />} />
-    //   </Routes>
-    // </Router>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/home" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/main" element={<MainScreen />} />
+      </Routes>
+    </Router>
     // <NavigationCounter>
     //   <Stack.Navigator initialRouteName="Home">
     //     <Stack.Screen name="Home" component={Home} />
@@ -31,4 +31,4 @@ function App() {
   );
 }
 
-export default App;
+export default SupportTicket;
