@@ -3,8 +3,12 @@ import Cards from "../Components/Cards";
 import Navbar from "../Components/Navbar";
 import DashboardScreen from "./DashboardScreen";
 import Actions from "../Components/Actions";
+import Sidebar from "../Components/Sidebar";
+import { useState } from "react";
+import Footer from "../Components/Footer/Footer";
 
 function MainScreen() {
+  const [activeScreen, setActiveScreen] = useState("main");
   return (
     <div>
       {/* Header Section */}
@@ -23,6 +27,25 @@ function MainScreen() {
       {/* Navigation */}
       <Navbar />
 
+      <Cards className="container-fluid">
+        <div className="row">
+          {/* Sidebar */}
+          <div className="col-2 p-0">
+            <Sidebar
+              activeScreen={activeScreen}
+              onScreenChange={setActiveScreen}
+            />
+          </div>
+
+          {/* Main Content */}
+          <div className="col-10 p-4">
+            <DashboardScreen />
+            <Actions />
+          </div>
+        </div>
+      </Cards>
+      {/* <Footer /> */}
+
       {/* Welcome Card */}
       {/* <Cards className="row justify-content-center mt-4">
         <div className="col-md-6">
@@ -37,8 +60,8 @@ function MainScreen() {
           </div>
         </div>
       </Cards> */}
-      <DashboardScreen />
-      <Actions />
+      {/* <DashboardScreen /> */}
+      {/* <Actions /> */}
     </div>
     // <div class="text-center mt-5">
     //   <h1 class="display-4">Welcome to Support Ticket System</h1>
